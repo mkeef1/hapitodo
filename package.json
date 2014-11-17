@@ -2,7 +2,7 @@
   "name": "hapitodo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "dependencies": {
     "good": "^4.0.0",
     "hapi": "^7.5.2",
