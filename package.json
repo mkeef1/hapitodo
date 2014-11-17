@@ -1,0 +1,28 @@
+{
+  "name": "hapitodo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "routes/index.js",
+  "dependencies": {
+    "good": "^4.0.0",
+    "hapi": "^7.5.2",
+    "good-console": "^2.0.1",
+    "joi": "^4.9.0",
+    "lout": "^5.1.2",
+    "mongoose": "^3.8.19"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mkeef1/hapitodo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkeef1/hapitodo/issues"
+  },
+  "homepage": "https://github.com/mkeef1/hapitodo"
+}
