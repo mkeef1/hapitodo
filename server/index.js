@@ -44,7 +44,7 @@ server.route({
     handler: function(req, rep){
         var query = Task.where({id: req.payload});
         query.findOne(function(err, task){
-            rep(task);
+            rep(task + 'your task');
         })
     }
 });
