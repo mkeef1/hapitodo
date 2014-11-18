@@ -17,6 +17,18 @@ var Priority = mongoose.model('Priority', prioritySchema);
 var Task = mongoose.model('Task', taskSchema);
 
 server.route({
+    method: 'DELETE',
+    path: '/tasks/{id}',
+    handler: function(req, rep){
+        Task.findOneAndRemove(req.params._id, function(err, task){
+            rep(task + 'was deleted');
+        });
+    }
+
+});
+
+
+server.route({
     method: 'PUT',
     path: '/tasks/{id}',
     handler: function(req, rep){
