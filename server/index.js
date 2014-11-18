@@ -16,6 +16,27 @@ var taskSchema = new Schema({name: String, priority: {type: Schema.Types.ObjectI
 var Priority = mongoose.model('Priority', prioritySchema);
 var Task = mongoose.model('Task', taskSchema);
 
+server.route({
+    method: 'PUT',
+    path: '/tasks/{id}',
+    handler: function(req, rep){
+        Task.findOneAndUpdate(req.params._id, req.payload, function(err, task){
+            rep(task);
+        });
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/tasks/{id}',
+    handler: function(req, rep){
+        var query = Task.where({id: req.payload});
+        query.findOne(function(err, task){
+            rep(task);
+        })
+    }
+});
+
 
 server.route({
     method: 'GET',
