@@ -7,7 +7,37 @@ var server = new Hapi.Server(port);
 var mongoose = require('mongoose');
 mongoose.connect(db);
 
-var Priority = mongoose.model('Priority', {name: String, color: String});
+var Schema = mongoose.Schema;
+
+var prioritySchema = new Schema({name: String, color: String});
+var taskSchema = new Schema({name: String, priority: {type: Schema.Types.ObjectId, ref: 'Priority'}});
+
+
+var Priority = mongoose.model('Priority', prioritySchema);
+var Task = mongoose.model('Task', taskSchema);
+
+
+server.route({
+    method: 'GET',
+    path: '/tasks',
+    handler: function(req, rep){
+        Task.find().populate('priority').exec(function(err, tasks){
+            rep(tasks);
+        });
+    }
+
+});
+
+server.route({
+    method: 'POST',
+    path: '/tasks',
+    handler: function(req, rep){
+        var task = new Task(req.payload);
+            task.save(function(){
+            rep(task);
+        })
+    }
+});
 
 server.route({
     method: 'POST',
@@ -22,11 +52,20 @@ server.route({
 
 server.route({
     method: 'GET',
-    path: '/priorities/{param*}',
+    path: '/priorities',
     handler: function(req, rep){
         Priority.find(function(err, priorities){
             rep(priorities);
         });
+    },
+    config:{
+        validate:{
+            params:{
+                name: Joi.string().min(1),
+                color: Joi.string().min(1)
+            }
+
+        }
     }
 });
 
